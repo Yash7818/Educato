@@ -4,17 +4,36 @@ import Peer from "simple-peer";
 import styled from "styled-components";
 
 const Container = styled.div`
-    padding: 20px;
+    padding:20px;
     display: flex;
     height: 100vh;
-    width: 90%;
+    width: 100%;
     margin: auto;
     flex-wrap: wrap;
-`;
+    background-color: rgba(7, 6, 28, 1);
+    `;
 
 const StyledVideo = styled.video`
     height: 40%;
     width: 50%;
+`;
+const Navof = styled.div`
+    display:flex;
+    position:absolute;
+    letter-spacing:3em;
+    padding:0 16em;
+    bottom:1em;
+    color:#fff;
+    font-size:2em;
+    z-index:10;
+`;
+
+const RefVideo = styled.div`
+    display:flex;
+    letter-spacing:1em;
+    color:#fff;
+    font-size:1em;
+    z-index:10;
 `;
 
 const Video = (props) => {
@@ -27,7 +46,8 @@ const Video = (props) => {
     }, []);
 
     return (
-        <StyledVideo playsInline autoPlay ref={ref} />
+        <StyledVideo playsInline autoPlay ref={ref} >
+        </StyledVideo>
     );
 }
 
@@ -117,6 +137,13 @@ const Room = (props) => {
                     <Video key={index} peer={peer} />
                 );
             })}
+
+            <Navof>
+          
+            <i class="fas fa-video-slash"></i>
+            <i class="fas fa-phone-slash"></i>
+            <i class="fas fa-microphone-slash"></i>
+            </Navof>
         </Container>
     );
 };

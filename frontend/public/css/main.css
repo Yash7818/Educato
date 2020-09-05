@@ -12,6 +12,10 @@ body {
   font-family: Poppins;
   color: #fff;
 }
+.main{
+  background-color: rgba(7, 6, 28, 1);
+
+}
 a {
   text-decoration: none;
   color: #fff;
@@ -387,3 +391,4 @@ header {
   top: 1em;
   left: 1.45em;
 }
+
