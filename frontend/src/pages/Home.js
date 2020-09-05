@@ -57,8 +57,9 @@ function Home(props) {
                 <a href="#features">Features</a>
                 <a href="#" onClick={() => setModal2(true)}>Sign Up</a>
                 {
-                    loading ? <div></div> :
-                        userInfo ? <Link to="/profile">{userInfo.name}</Link> : <a href="#" onClick={() => setModal(true)}>Log In</a>}
+                    loading ? <span>Loading...</span> :
+                        error ? <span>{error}</span> :
+                            userInfo ? <Link to="/profile"><span className="prof-home">{userInfo.name[0]}</span></Link> : <a href="#" onClick={() => setModal(true)}>Log In</a>}
             </div>
         </header>
         <div className="container">
@@ -68,7 +69,7 @@ function Home(props) {
                 <form onSubmit={submitHandler}>
                     <div className="product-container">
                         <div>
-                            <input type="email" name="email" autoComplete="false" required onChange={(e) => setEmail(e.target.value)}></input>
+                            <input type="email" name="email" autoComplete="off" required onChange={(e) => setEmail(e.target.value)}></input>
                             <label>Email</label>
                         </div>
                         <div>
@@ -88,11 +89,11 @@ function Home(props) {
                 <form onSubmit={registerHandler}>
                     <div className="product-container">
                         <div>
-                            <input type="text" name="name" required onChange={(e) => setName(e.target.value)}></input>
+                            <input type="text" name="name" autoComplete="off" required onChange={(e) => setName(e.target.value)}></input>
                             <label>Username</label>
                         </div>
                         <div>
-                            <input type="email" name="email" required onChange={(e) => setEmail(e.target.value)}></input>
+                            <input type="email" name="email" autoComplete="off" required onChange={(e) => setEmail(e.target.value)}></input>
                             <label>Email</label>
                         </div>
                         <div>
