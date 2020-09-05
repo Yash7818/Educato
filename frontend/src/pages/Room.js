@@ -139,7 +139,6 @@ const Room = (props) => {
             })}
 
             <Navof>
-          
             <i class="fas fa-video-slash"></i>
             <i class="fas fa-phone-slash"></i>
             <i class="fas fa-microphone-slash"></i>
