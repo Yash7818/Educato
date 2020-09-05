@@ -15,7 +15,7 @@ const {
   default: Axios,
 } = require('axios');
 
-const update = ({ userId, name, email, password }) => async (
+const update = ({ userId, name, email, password ,fd}) => async (
   dispatch,
   getState
 ) => {
@@ -24,12 +24,12 @@ const update = ({ userId, name, email, password }) => async (
   } = getState();
   dispatch({
     type: USER_UPDATE_REQUEST,
-    payload: { userId, name, email, password },
+    payload: { userId, name, email, password,fd },
   });
   try {
     const { data } = await Axios.put(
       "/api/users/" + userId,
-      { name, email, password },
+      { name, email, password, fd },
       {
         headers: {
           Authorization: "Bearer " + userInfo.token,

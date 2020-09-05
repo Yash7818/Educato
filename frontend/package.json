@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy":"http://127.0.0.1:5000",
+  "proxy": "http://127.0.0.1:5000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +16,11 @@
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "simple-peer": "^9.6.2",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.2.0",
+    "uuid": "^8.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

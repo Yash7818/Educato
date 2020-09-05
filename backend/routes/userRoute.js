@@ -3,28 +3,10 @@ import User from '../models/usermodel'
 import { getToken, isAuth } from '../utils'
 import multer from 'multer';
 import sharp from 'sharp';
+import uuidv4 from 'uuid';
 const router = express.Router();
 
-router.put('/:id',isAuth,async(req,res)=>{
-    const userId = req.params.id;
-    const user = await User.findById(userId)
-    if(user){
-        user.name = req.body.name || user.name
-        user.email = req.body.email || user.email
-        user.password = req.body.password || user.password
-        const updateUser = await user.save();
-        res.send({
-            _id:updateUser.id,
-            name:updateUser.name,
-            email:updateUser.email,
-            isAdmin:updateUser.isAdmin,
-            token:getToken(updateUser)
-        })
-        
-    } else {
-        res.status(404).send({message:'User not found'})
-    }
-})
+const DIR = './public/'
 
 
 router.post('/signin', async(req,res) => {
@@ -69,27 +51,57 @@ router.post('/register',async(req,res)=>{
 
 })
 
-
-const upload = multer({
-    limits : {
-        fileSize : 5000000
+const storage = multer.diskStorage({
+    destination:(req,file,cb) =>{
+        cb(null,DIR)
     },
-    fileFilter(req,file,cb){
-        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
-            return cb(new Error('this file in not compatible'))
-        }
-        cb(undefined,true)
+    filename:(req,file,cb)=>{
+        const fileName = file.originalname.toLowerCase().split(' ').join('-')
+        cb(null,uuidv4() + '-' + fileName) 
     }
 })
-router.post('/mine/avatar',isAuth,upload.single('avatar'),async(req,res)=>{
-    const buffer = await sharp(req.file.buffer).resize({width:1000,height:1000}).png().toBuffer()
-    await req.user.save()
-    res.send({
-        avatar:buffer,
-        token:getToken(buffer)
-    })
-},(error,req,res,next) =>{
-    res.status(400).send({error:error.message})
+
+const upload = multer({
+   storage:storage,
+   fileFilter:(req,file,cb)=>{
+       if(file.mimetype == 'image/png' || file.mimetype == 'image/png' || file.mimetype == 'image/png'){
+           cb(null,true)
+       } else{
+           cb(null,false)
+           return cb(new Error('The image is not compatible'))
+       }
+   }
 })
+
+
+router.put('/:id',isAuth,upload.single('avatar'),async(req,res)=>{
+    const url = req.protocol + '://' + req.get('host')
+    const userId = req.params.id;
+    const user = await User.findById(userId)
+    if(user){
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+        user.password = req.body.password || user.password
+        // user.avatar = url+'/public/'+ req.file.filename || user.avatar
+        const updateUser = await user.save();
+        res.send({
+            _id:updateUser.id,
+            name:updateUser.name,
+            email:updateUser.email,
+            // avatar : updateUser.avatar,
+            token:getToken(updateUser)
+        })
+        
+    } else {
+        res.status(404).send({message:'User not found'})
+    }
+})
+
+// router.post('/mine/avatar',isAuth,upload.single('avatar'),async(req,res)=>{
+//    const url = req.protocol + '://' + req.get('host')
+//    const user = new User({
+       
+//    })
+// })
 
 export default router

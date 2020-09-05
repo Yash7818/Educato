@@ -3,21 +3,24 @@ import { Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, update } from '../actions/userActions';
 import { appHistory } from '../App';
+import { uuid } from 'uuidv4';
 function Profile(props){
     const [modal,setModal] = useState(false);
     const [modal1,setModal1] = useState(false);
     const [modal2,setModal2] = useState(false);
+    const [modal3,setModal3] = useState(false);
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [avatar,setAvatar]  = useState('');
     const [newpass,setNewpass] = useState('');
+    const [room,setRoom] = useState('');
     // const history = useHistory();
     // const isFocused = useIsFocused();   
      const dispatch = useDispatch();
     
     var userSignin = useSelector(state=>state.userSignin);
     const {userInfo} = userSignin;
-  
     const handleLogout = (e) =>{
         // e.preventDefault();
         dispatch(logout());
@@ -27,8 +30,12 @@ function Profile(props){
     }
     const updateHandler = (e) =>{
         e.preventDefault();
+        // console.log(avatar)
+        const fd = new FormData();
+        fd.append('avatar',avatar);
+        console.log(fd)
         if(password === userInfo.password && !newpass)
-            dispatch(update({userId:userInfo._id,email,name,password}));
+            dispatch(update({userId:userInfo._id,email,name,password,fd}));
         else if(password === userInfo.password && newpass){
             dispatch(update({userId:userInfo._id,email,name,newpass})); 
         } 
@@ -38,13 +45,22 @@ function Profile(props){
         if(modal){
             setModal(false);
         }
-        
         if(modal1){
             setModal1(false);
         }
         // appHistory.push('/profile');
         // appHistory.goBack();
         // window.location.reload(false);
+    }
+    const createRoom = () =>{
+        const id = uuid();
+        // props.history.push(`/room/${id}`,'_blank');
+        window.open(`/room/${id}`,'_blank');
+        
+    }
+    const joinHandler = () => {
+        window.open(`/room/${room}`,'_blank');
+        setModal3(false);
     }
     const openmodal = (userInfo) =>{
         setModal(true);
@@ -55,6 +71,10 @@ function Profile(props){
     const openmodal1 = (userInfo) =>{
         setModal1(true);
         setPassword(userInfo.password);
+    }
+    const openmodal3 = () => {
+        setModal3(true);
+
     }
     useEffect(()=>{
         if(userInfo){
@@ -98,8 +118,24 @@ function Profile(props){
                         <input type="email" name="email" value={email} required onChange={(e)=>setEmail(e.target.value)}></input>
                         <label>Email</label>
                     </div>
-                   
+                    <div className="avatar">
+                        <input type="file" name="avatar" required onChange={(e)=>setAvatar(e.target.files[0])} ></input>
+                        <label>Avatar</label>
+                    </div>
                     <input type="submit" value="Update"></input>
+                    </div>
+                </form>
+            </div>}
+        {!modal3?<div></div>:<div className="divi-container">
+            <span onClick={()=>setModal3(false)} className="close">&#x2716;</span>
+               <h1>Join</h1>
+                <form onSubmit={joinHandler}>
+                    <div className="product-container">
+                    <div>
+                        <input type="text" name="name" required onChange={(e)=>setRoom(e.target.value)}></input>
+                        <label>Room ID</label>
+                    </div>
+                    <input type="submit" value="Join"></input>
                     </div>
                 </form>
             </div>}
@@ -112,12 +148,6 @@ function Profile(props){
                         <input type="password" name="name"  required onChange={(e)=>setPassword(e.target.value)}></input>
                         <label>Old Password</label>
                     </div>
-                    {modal2?<div>
-                            <span>Password didn't match</span>
-                        </div>:<div></div>
-                        
-                    }
-                   
                     <div>
                         <input type="password" name="email" required onChange={(e)=>setNewpass(e.target.value)}></input>
                         <label>New Password</label>
@@ -134,7 +164,9 @@ function Profile(props){
         <div className="left-prof">
             <div className="prof-container">
                 <div className="prof-img">
-
+                    {
+                        userInfo.avatar?<div></div>:<div className="default">{userInfo.name[0]}</div>
+                    }
                 </div>
                
             </div>
@@ -145,11 +177,11 @@ function Profile(props){
             </div>
         </div>
         <div className="right-prof">
-            <div className="host" id="host">
+            <div className="host" id="host" onClick={createRoom}>
                 <h2>Host</h2>
                 <div className="host_cont">Host a video chat</div>
             </div>
-            <div className="host" id="join">
+            <div className="host" id="join" onClick={openmodal3}>
                 <h2>Join</h2>
                 <div className="host_cont">Join a chat room</div>
             </div>

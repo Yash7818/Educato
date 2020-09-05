@@ -227,6 +227,11 @@ header {
   color: #999;
   transition: 0.4s;
 }
+.divi-container form .product-container .avatar label{
+  top: -12px;
+  color: tomato;
+  font-size: 14px;
+}
 .divi-container div div input:focus ~ label,
 .divi-container div div input:valid ~ label {
   top: -12px;
@@ -371,4 +376,14 @@ header {
   cursor: pointer;
   text-align: center;
   align-content: center;
+}
+.default{
+  position: absolute;
+  text-transform: capitalize;
+  /* text-align: center; */
+  text-shadow: 0 0 30px #FF0000, 0 0 30px #0000FF; 
+  font-size: 8em;
+  font-weight: 600;
+  top: 1em;
+  left: 1.45em;
 }
