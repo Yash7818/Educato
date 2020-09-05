@@ -1,7 +1,6 @@
 import express from 'express'
 import User from '../models/usermodel'
 import { getToken, isAuth } from '../utils'
-import config from '../config'
 import multer from 'multer';
 import sharp from 'sharp';
 import uuidv4 from 'uuid';
@@ -11,69 +10,40 @@ const DIR = './public/'
 
 
 router.post('/signin', async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-        return res.status(422).send({ error: "please add email or password" });
-    }
-    await User.findOne({
-        email,
-    }).then((savedUser) => {
-        if (!savedUser) {
-            return res.status(422).send({ error: "invalid Email or Password" });
-        }
-        bcrypt.compare(password, savedUser.password).then((isMatch) => {
-            if (isMatch) {
-                const token = getToken(savedUser)
-                const { _id, name, email, isAdmin } = savedUser;
-                res.send({
-                    _id,
-                    name,
-                    email,
-                    isAdmin,
-                    token
-                });
-            }
-            else {
-                return res.status(422).send("Error wromg Email or Password");
-            }
-        }).catch((err) => {
-            res.status(404).send(err);
-        });
+    const signinuser = await User.findOne({
+        email: req.body.email,
+        password: req.body.password
     })
-    // if(signinuser){
-    //     res.send({
-    //         _id:signinuser.id,
-    //         name:signinuser.name,
-    //         email:signinuser.email,
-    //         isAdmin:signinuser.isAdmin,
-    //         token:getToken(signinuser)
-    //     })
-    // } else{
-    //     res.status(401).send({error: 'Invalid Credentials'})
-    // }
+    if (signinuser) {
+        res.send({
+            _id: signinuser.id,
+            name: signinuser.name,
+            email: signinuser.email,
+            isAdmin: signinuser.isAdmin,
+            token: getToken(signinuser)
+        })
+    } else {
+        res.status(401).send({ error: 'Invalid Credentials' })
+    }
 })
 router.post('/register', async (req, res) => {
     try {
-        const { name, email, password } = req.body;
-        if (!name || !email || !password) {
-            return res.status(422).send({ error: "pls add all fields correctly" });
-        }
-        User.findOne({ email }).then((savedUser) => {
-            if (savedUser) {
-                return res.status(404).send({ error: "User already Exists" });
-            }
-            bcrypt.hash(password, 8).then((hashedPassword) => {
-                const user = new User({
-                    name,
-                    email,
-                    password: hashedPassword
-                })
-                user.save().then(() => res.status(201).send({
-                    message: "user saved succesfully"
-                })).catch((err) => res.status(404).send(err));
-            })
+        const user = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
         })
 
+        const newUser = await user.save()
+        if (newUser) {
+            res.send({
+                _id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                password: newUser.password,
+                token: getToken(newUser)
+            })
+        }
     } catch (e) {
         res.status(404).send(e)
         console.log(e)

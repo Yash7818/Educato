@@ -17,14 +17,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-<<<<<<< HEAD
     avatar: {
-        type: Buffer,
-        contentType: String
-=======
-    avatar : {
-        type:String
->>>>>>> upstream/master
+        type: String
     }
 
 }, {
