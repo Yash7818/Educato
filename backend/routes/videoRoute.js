@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const Video = require('../models/videomodel')
+// const Video = require('../models/videomodel')
+import Video from '../models/videomodel'
 import { isAuth } from "../utils"
 
-router.post('/createvideo', isAuth, (req, res) => {
+router.post('/createvideo', (req, res) => {
     const { title, body, url } = req.body;
     if (!title || !body || !url) {
-        return res.status(422).send({ error: "Plase add all the fields" });
+        return res.status(422).json({ error: "Plase add all the fields" });
     }
-    console.log(req.user);
-    console.log(title, body, url);
+    // console.log(req.user);
     const video = new Video({
-        title: title,
-        body: body,
-        url: url,
-        postedBy: req.user
+        title,
+        body,
+        url,
+        // postedBy: req.user
     })
     video.save().then(result => {
         res.send({ result })
@@ -23,4 +23,4 @@ router.post('/createvideo', isAuth, (req, res) => {
     })
 })
 
-module.exports = router;
+module.exports = router; 
