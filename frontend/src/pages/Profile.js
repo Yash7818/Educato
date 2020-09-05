@@ -119,10 +119,10 @@ function Profile(props){
                         <input type="email" name="email" value={email} required onChange={(e)=>setEmail(e.target.value)}></input>
                         <label>Email</label>
                     </div>
-                    <div className="avatar">
+                    {/* <div className="avatar">
                         <input type="file" name="avatar" required onChange={(e)=>setAvatar(e.target.files[0])} ></input>
                         <label>Avatar</label>
-                    </div>
+                    </div> */}
                     <input type="submit" value="Update"></input>
                     </div>
                 </form>

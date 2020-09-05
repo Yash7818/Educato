@@ -445,10 +445,10 @@ function Home(props) {
                 <div className="text-feature">
                     <ul>
                         <li>
-                            Easy interactive classNamees.
+                            Easy interactive classes.
                             </li>
                         <li>
-                            Easy accessiblity to classNamees.
+                            Easy accessiblity to classes.
                             </li>
                         <li>
                             Authenticated secured access.
