@@ -187,10 +187,6 @@ function Profile(props){
                 <h2>Join</h2>
                 <div className="host_cont">Join a chat room</div>
             </div>
-            <div className="host" id="retrive">
-                <h2>Retrive</h2>
-                <div className="host_cont">Retrive your saved videos</div>
-            </div>
             <div className="host" id="change_pass" onClick={()=>openmodal1(userInfo)}>
                 <h2>Password</h2>
                 <div className="host_cont">Change your password</div>
