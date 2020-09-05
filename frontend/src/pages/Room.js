@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
     padding:20px;
@@ -12,27 +13,31 @@ const Container = styled.div`
     flex-wrap: wrap;
     background-color: rgba(7, 6, 28, 1);
     `;
-
+const VideoDiv = styled.div`
+height: 40%;
+width: 50%;
+`;
 const StyledVideo = styled.video`
-    height: 40%;
-    width: 50%;
+height: 40%;
+width: 50%;
+`;
+const StyledVideoduo = styled.video`
+height: 100%;
+width: 100%;
 `;
 const Navof = styled.div`
     display:flex;
     position:absolute;
     letter-spacing:3em;
-    padding:0 16em;
+    padding:0 18.5em;
     bottom:1em;
     color:#fff;
     font-size:2em;
     z-index:10;
+    cursor:pointer;
 `;
 
-const RefVideo = styled.div`
-    display:flex;
-    letter-spacing:1em;
-    color:#fff;
-    font-size:1em;
+const RefVideo = styled.i`
     z-index:10;
 `;
 
@@ -46,8 +51,10 @@ const Video = (props) => {
     }, []);
 
     return (
-        <StyledVideo playsInline autoPlay ref={ref} >
-        </StyledVideo>
+        <VideoDiv>
+             <StyledVideoduo playsInline autoPlay ref={ref} ></StyledVideoduo>
+        </VideoDiv>
+       
     );
 }
 
@@ -58,11 +65,32 @@ const videoConstraints = {
 };
 
 const Room = (props) => {
+    const [voice,setVoice] = useState(false);
     const [peers, setPeers] = useState([]);
     const socketRef = useRef();
     const userVideo = useRef();
     const peersRef = useRef([]);
     const roomID = props.match.params.roomID;
+
+    var userSignin = useSelector(state=>state.userSignin);
+    const {userInfo} = userSignin;
+    // console.log(userInfo.name)
+    const callcutHandler = () => {
+        window.close();
+    }
+
+    const MessageChat = () =>{
+        window.open(`https://yash7818chat-app.herokuapp.com/chat.html?username=${userInfo.name}&room=${roomID}`)
+    }
+    const MuteMe = () =>{
+        if(voice){
+            console.log(voice)
+            setVoice(false);
+        }
+        else{
+            setVoice(true);
+        }
+    }
 
     useEffect(() => {
         socketRef.current = io.connect("/");
@@ -139,9 +167,8 @@ const Room = (props) => {
             })}
 
             <Navof>
-            <i class="fas fa-video-slash"></i>
-            <i class="fas fa-phone-slash" onClick={()=>window.close()}></i>
-            <i class="fas fa-microphone-slash"></i>
+            <i class="fas fa-phone-slash" onClick={callcutHandler}></i>
+            <i class="far fa-comments" onClick={MessageChat}></i>
             </Navof>
         </Container>
     );

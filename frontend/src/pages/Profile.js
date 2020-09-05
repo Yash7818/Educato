@@ -103,7 +103,7 @@ function Profile(props){
         <Link to="/" href="#">Home</Link>
         <Link to="/#about" href="#about">About</Link>
         <Link to="/#features" href="#features">Features</Link>
-        <a href="#" onClick={handleLogout}>Logout</a>
+        <a href="#" onClick={handleLogout} className="logout_ac">Logout</a>
     </div>
 </header>
 {!modal?<div></div>:<div className="divi-container">
@@ -133,7 +133,7 @@ function Profile(props){
                 <form onSubmit={joinHandler}>
                     <div className="product-container">
                     <div>
-                        <input type="text" name="name" required onChange={(e)=>setRoom(e.target.value)}></input>
+                        <input type="text" name="name" autoComplete="off" required onChange={(e)=>setRoom(e.target.value)}></input>
                         <label>Room ID</label>
                     </div>
                     <input type="submit" value="Join"></input>
@@ -180,7 +180,7 @@ function Profile(props){
         <div className="right-prof">
             <div className="host" id="host" onClick={createRoom}>
                 <h2>Host</h2>
-                {!room? <div className="host_cont">Host a video chat</div>:<div className="host_cont">Room ID:{room}</div>}
+                {!room? <div className="host_cont">Host a video chat</div>:<div className="host_cont">Room ID:&nbsp;&nbsp;{room}</div>}
                
             </div>
             <div className="host" id="join" onClick={openmodal3}>
