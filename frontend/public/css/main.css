@@ -404,3 +404,9 @@ header {
 .logout_ac{
   color:rgb(250, 104, 104);
 }
+
+.roomid{
+  position: absolute;
+  top: 10em;
+  right:11em;
+}

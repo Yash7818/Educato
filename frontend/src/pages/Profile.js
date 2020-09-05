@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, update } from '../actions/userActions';
 import { appHistory } from '../App';
 import { uuid } from 'uuidv4';
+import { Link } from 'react-router-dom';
 function Profile(props){
     const [modal,setModal] = useState(false);
     const [modal1,setModal1] = useState(false);
@@ -178,6 +178,10 @@ function Profile(props){
             </div>
         </div>
         <div className="right-prof">
+            {room?<div className="roomid">
+                RoomID : {room}
+            </div>:<div></div>}
+           
             <div className="host" id="host" onClick={createRoom}>
                 <h2>Host</h2>
                 {!room? <div className="host_cont">Host a video chat</div>:<div className="host_cont">Room ID:&nbsp;&nbsp;{room}</div>}
