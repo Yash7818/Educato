@@ -54,6 +54,7 @@ function Profile(props){
     }
     const createRoom = () =>{
         const id = uuid();
+        setRoom(id);
         // props.history.push(`/room/${id}`,'_blank');
         window.open(`/room/${id}`,'_blank');
         
@@ -179,7 +180,8 @@ function Profile(props){
         <div className="right-prof">
             <div className="host" id="host" onClick={createRoom}>
                 <h2>Host</h2>
-                <div className="host_cont">Host a video chat</div>
+                {!room? <div className="host_cont">Host a video chat</div>:<div className="host_cont">Room ID:{room}</div>}
+               
             </div>
             <div className="host" id="join" onClick={openmodal3}>
                 <h2>Join</h2>
