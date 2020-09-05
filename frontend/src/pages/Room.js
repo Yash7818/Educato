@@ -140,7 +140,7 @@ const Room = (props) => {
 
             <Navof>
             <i class="fas fa-video-slash"></i>
-            <i class="fas fa-phone-slash"></i>
+            <i class="fas fa-phone-slash" onClick={()=>window.close()}></i>
             <i class="fas fa-microphone-slash"></i>
             </Navof>
         </Container>
