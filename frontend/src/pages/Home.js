@@ -624,10 +624,10 @@ function Home(props) {
                 <div className="contact-links">
                     <h2>Backend Developer</h2>
                     <ul>
-                        <li> <a href="#"><i className="fab fa-instagram"></i>   <span>Instagram</span></a></li>
-                        <li> <a href="#"><i className="fab fa-github"></i>   <span>GitHub</span> </a></li>
-                        <li> <a href="#"><i className="fab fa-facebook"></i >   <span>Facebook</span> </a></li>
-                        <li> <a href="#"><i className="far fa-envelope"></i>   <span>Mail</span> </a></li>
+                        <li> <a href="https://www.instagram.com/as.hutosh5613/"><i className="fab fa-instagram"></i>   <span>Instagram</span></a></li>
+                        <li> <a href="https://github.com/ashutosh1401"><i className="fab fa-github"></i>   <span>GitHub</span> </a></li>
+                        <li> <a href="https://www.facebook.com/profile.php?id=100052262327183"><i className="fab fa-facebook"></i >   <span>Facebook</span> </a></li>
+                        <li> <a href="mailto:ashutoshthakur_14@yahoo.com"><i className="far fa-envelope"></i>   <span>Mail</span> </a></li>
                     </ul>
                 </div>
             </div>
