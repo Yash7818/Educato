@@ -24,5 +24,5 @@
   
   VIDEO DEMO ![LINK](https://www.youtube.com/watch?v=BiM0F43FGLk)
   
-  **Frontend and UI - Yash Wandhare
-  **Backend - Ashutosh Thakur
+  **Frontend and UI - Yash Wandhare**<br>
+  **Backend - Ashutosh Thakur**
