@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, update } from '../actions/userActions';
 import { appHistory } from '../App';
 import { uuid } from 'uuidv4';
+import { Link } from 'react-router-dom';
 function Profile(props){
     const [modal,setModal] = useState(false);
     const [modal1,setModal1] = useState(false);
@@ -103,7 +103,7 @@ function Profile(props){
         <Link to="/" href="#">Home</Link>
         <Link to="/#about" href="#about">About</Link>
         <Link to="/#features" href="#features">Features</Link>
-        <a href="#" onClick={handleLogout}>Logout</a>
+        <a href="#" onClick={handleLogout} className="logout_ac">Logout</a>
     </div>
 </header>
 {!modal?<div></div>:<div className="divi-container">
@@ -133,7 +133,7 @@ function Profile(props){
                 <form onSubmit={joinHandler}>
                     <div className="product-container">
                     <div>
-                        <input type="text" name="name" required onChange={(e)=>setRoom(e.target.value)}></input>
+                        <input type="text" name="name" autoComplete="off" required onChange={(e)=>setRoom(e.target.value)}></input>
                         <label>Room ID</label>
                     </div>
                     <input type="submit" value="Join"></input>
@@ -178,18 +178,18 @@ function Profile(props){
             </div>
         </div>
         <div className="right-prof">
+            {room?<div className="roomid">
+                RoomID : {room}
+            </div>:<div></div>}
+           
             <div className="host" id="host" onClick={createRoom}>
                 <h2>Host</h2>
-                {!room? <div className="host_cont">Host a video chat</div>:<div className="host_cont">Room ID:{room}</div>}
+                {!room? <div className="host_cont">Host a video chat</div>:<div className="host_cont">Room ID:&nbsp;&nbsp;{room}</div>}
                
             </div>
             <div className="host" id="join" onClick={openmodal3}>
                 <h2>Join</h2>
                 <div className="host_cont">Join a chat room</div>
-            </div>
-            <div className="host" id="retrive">
-                <h2>Retrive</h2>
-                <div className="host_cont">Retrive your saved videos</div>
             </div>
             <div className="host" id="change_pass" onClick={()=>openmodal1(userInfo)}>
                 <h2>Password</h2>

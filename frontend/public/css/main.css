@@ -393,11 +393,20 @@ header {
 }
 .prof-home{
   text-transform: uppercase;
-  border: 2px #fff solid;
+  border: 3px #fff solid;
   padding:.2em .6em;
   border-radius: 50%;
   font-size: 1.4em;
   font-weight: 700;
   text-shadow: 0 0 30px #FF0000, 0 0 30px #0000FF; 
 
+}
+.logout_ac{
+  color:rgb(250, 104, 104);
+}
+
+.roomid{
+  position: absolute;
+  top: 10em;
+  right:11em;
 }
