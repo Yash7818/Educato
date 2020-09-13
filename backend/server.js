@@ -12,17 +12,17 @@ import http from 'http'
 dotenv.config()
 const mongodbUrl = config.MONGODB_URL
 
-mongoose.connect(mongodbUrl,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-    useCreateIndex:true
-}).catch(error => console.log(error.reason));
+mongoose.connect(mongodbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}).then(() => console.log('Mongoose Connected')).catch(error => console.log(error.reason));
 
 const app = express()
 app.use(bodyParser.json())
 app.use(Cors())
-app.use("/api/users",userRoute)
-app.use("/api/video",videoRoute)
+app.use("/api/users", userRoute)
+app.use("/api/video", videoRoute)
 const server = http.createServer(app)
 const io = socket(server);
 
@@ -66,6 +66,6 @@ io.on('connection', socket => {
     });
 
 });
-server.listen(5000,()=>{
+server.listen(5000, () => {
     console.log('server started at 5000')
 })
