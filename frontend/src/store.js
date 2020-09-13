@@ -6,6 +6,7 @@ import {
   userRegisterReducer,
   userUpdateReducer,
 } from "./reducers/userReducer";
+import {videoListReducer, videoDetailsReducer, videoSaveReducer, videoDeleteReducer} from './reducers/videoReducer'
 
 const userInfo = Cookie.getJSON("userInfo") || null;
 
@@ -14,6 +15,12 @@ const reducer = combineReducers({
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
   userUpdate: userUpdateReducer,
+  videoList:videoListReducer,
+  videoDetails:videoDetailsReducer,
+  videoSave:videoSaveReducer,
+  videoDelete:videoDeleteReducer
+
+
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENTION_COMPOSE__ || compose;
 const store = createStore(

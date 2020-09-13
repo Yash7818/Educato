@@ -18,6 +18,8 @@ const videoSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User",
     },
+},{
+    timestamps:true
 });
 
 const videoModel = mongoose.model("Video", videoSchema);

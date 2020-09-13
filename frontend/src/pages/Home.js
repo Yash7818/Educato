@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import {signin,register} from '../actions/userActions'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 function Home(props){
     // window.location.reload();
     const [modal,setModal] = useState(false);
+    const [modal1,setModal1] = useState(false);
     const [modal2,setModal2] = useState(false);
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
@@ -30,12 +31,21 @@ function Home(props){
         e.preventDefault();
         dispatch(signin(email,password));
         setModal(false);
+        if(error){
+            setModal1(true)
+        }
+       
     }
 
     const registerHandler = (e) => {
         e.preventDefault(e);
         dispatch(register(name,email,password));
         setModal2(false);
+        // console.log(userInfo2)
+        // console.log(error2)
+        // if(error2){
+        //     setModal1(true)
+        // }
     }
 
     return <div className="main">
@@ -57,11 +67,30 @@ function Home(props){
                <a href="#features">Features</a>
                <a href="#" onClick={()=>setModal2(true)}>Sign Up</a>
                 {
-                   loading?<span>Loading...</span>:   
-                    error?<span>{error}</span>: 
+                   loading?<span>Loading...</span>:
                 userInfo?<Link to="/profile"><span className="prof-home">{userInfo.name[0]}</span></Link>:<a href="#" onClick={()=>setModal(true)}>Log In</a>}
            </div>
        </header>
+       {
+           modal1?<div className="divi-container">
+           <span onClick={()=>setModal1(false)} className="close">&#x2716;</span>
+           <h1>Error!!</h1>
+            <form>
+                <div className="product-container">
+                    {error?<div>    
+                   Invalid Credentials ( Email Or Password )
+                    </div>:<div>User Already Exist</div>}
+                
+                    <input type="submit" value="Log In" onClick={()=>setModal(true)}></input>
+                <div>
+                    {'    '}
+                </div>
+                    <input type="submit" value="Sign Up" onClick={()=>setModal2(true)}></input>
+                
+                </div>
+            </form>
+        </div>:<div></div>
+       }
        <div className="container">
            {!modal?<div></div>:<div className="divi-container">
                <span onClick={()=>setModal(false)} className="close">&#x2716;</span>

@@ -27,6 +27,14 @@ router.post('/signin', async(req,res) => {
     }
 })
 router.post('/register',async(req,res)=>{
+
+    const inuser = await User.findOne({
+        email:req.body.email
+    })
+    if(inuser){
+        return new Error('User already exist')
+    }
+    
     try{
         const user = new User({
             name:req.body.name,
