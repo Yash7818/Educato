@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { signin, register } from '../actions/userActions'
+import {useSelector,useDispatch} from 'react-redux';
+import {signin,register} from '../actions/userActions'
 import { Link, Redirect } from 'react-router-dom';
 
 function Home(props) {
     // window.location.reload();
-    const [modal, setModal] = useState(false);
-    const [modal1, setModal1] = useState(false);
-    const [modal2, setModal2] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [modal,setModal] = useState(false);
+    const [modal1,setModal1] = useState(false);
+    const [modal2,setModal2] = useState(false);
+    const [name,setName] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
 
     const userSignin = useSelector(state => state.userSignin);
     const { loading, userInfo, error } = userSignin;
@@ -31,10 +31,10 @@ function Home(props) {
         e.preventDefault();
         dispatch(signin(email, password));
         setModal(false);
-        if (error) {
+        if(error){
             setModal1(true)
         }
-
+       
     }
 
     const registerHandler = (e) => {
@@ -48,7 +48,7 @@ function Home(props) {
         // }
     }
 
-    return (<div className="main">
+    return <div className="main">
         <div className="bg-img">
             <svg width="1000" height="1000" viewBox="0 0 1546 1408" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <ellipse cx="773" cy="704" rx="773" ry="704" fill="url(#paint0_radial)" fill-opacity="0.28" />
@@ -67,34 +67,34 @@ function Home(props) {
                 <a href="#features">Features</a>
                 <a href="#" onClick={() => setModal2(true)}>Sign Up</a>
                 {
-                    loading ? <span>Loading...</span> :
-                        userInfo ? <Link to="/profile"><span className="prof-home">{userInfo.name[0]}</span></Link> : <a href="#" onClick={() => setModal(true)}>Log In</a>}
-            </div>
-        </header>
-        {
-            modal1 ? <div className="divi-container">
-                <span onClick={() => setModal1(false)} className="close">&#x2716;</span>
-                <h1>Error!!</h1>
-                <form>
-                    <div className="product-container">
-                        {error ? <div>
-                            Invalid Credentials ( Email Or Password )
-                    </div> : <div>User Already Exist</div>}
-
-                        <input type="submit" value="Log In" onClick={() => setModal(true)}></input>
-                        <div>
-                            {'    '}
-                        </div>
-                        <input type="submit" value="Sign Up" onClick={() => setModal2(true)}></input>
-
-                    </div>
-                </form>
-            </div> : <div></div>
-        }
-        <div className="container">
-            {!modal ? <div></div> : <div className="divi-container">
-                <span onClick={() => setModal(false)} className="close">&#x2716;</span>
-                <h1>Log In</h1>
+                   loading?<span>Loading...</span>:
+                userInfo?<Link to="/profile"><span className="prof-home">{userInfo.name[0]}</span></Link>:<a href="#" onClick={()=>setModal(true)}>Log In</a>}
+           </div>
+       </header>
+       {
+           modal1?<div className="divi-container">
+           <span onClick={()=>setModal1(false)} className="close">&#x2716;</span>
+           <h1>Error!!</h1>
+            <form>
+                <div className="product-container">
+                    {error?<div>    
+                   Invalid Credentials ( Email Or Password )
+                    </div>:<div>User Already Exist</div>}
+                
+                    <input type="submit" value="Log In" onClick={()=>setModal(true)}></input>
+                <div>
+                    {'    '}
+                </div>
+                    <input type="submit" value="Sign Up" onClick={()=>setModal2(true)}></input>
+                
+                </div>
+            </form>
+        </div>:<div></div>
+       }
+       <div className="container">
+           {!modal?<div></div>:<div className="divi-container">
+               <span onClick={()=>setModal(false)} className="close">&#x2716;</span>
+               <h1>Log In</h1>
                 <form onSubmit={submitHandler}>
                     <div className="product-container">
                         <div>
@@ -660,20 +660,11 @@ function Home(props) {
                     </ul>
                 </div>
             </div>
-            <div className="contact-links">
-                <h2>Backend Developer</h2>
-                <ul>
-                    <li> <a href="https://www.instagram.com/as.hutosh5613/"><i className="fab fa-instagram"></i>   <span>Instagram</span></a></li>
-                    <li> <a href="https://github.com/ashutosh1401"><i className="fab fa-github"></i>   <span>GitHub</span> </a></li>
-                    <li> <a href="https://www.facebook.com/profile.php?id=100052262327183"><i className="fab fa-facebook"></i >   <span>Facebook</span> </a></li>
-                    <li> <a href="mailto:ashutoshthakur_14@yahoo.com"><i className="far fa-envelope"></i>   <span>Mail</span> </a></li>
-                </ul>
-                <div className="copyright">
-                    © 2020 Copyright. All rights reserved | Marcos_iiitsurat
+            <div className="copyright">
+                © 2020 Copyright. All rights reserved | Marcos_iiitsurat
                 </div>
-            </div>
         </div>
-    </div>)
+    </div>
 }
 
 

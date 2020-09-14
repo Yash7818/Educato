@@ -26,17 +26,8 @@ router.post('/signin', async (req, res) => {
         res.status(401).send({ error: 'Invalid Credentials' })
     }
 })
-router.post('/register',async(req,res)=>{
-
-    const inuser = await User.findOne({
-        email:req.body.email
-    })
-    if(inuser){
-        return new Error('User already exist')
-    }
-    
-    try{
-
+router.post('/register', async (req, res) => {
+    try {
         const user = new User({
             name: req.body.name,
             email: req.body.email,

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import copy from 'copy-to-clipboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, update } from '../actions/userActions';
 import { appHistory } from '../App';
@@ -76,6 +77,9 @@ function Profile(props){
     const openmodal3 = () => {
         setModal3(true);
 
+    }
+    const copytext = () =>{
+        copy(room)
     }
     useEffect(()=>{
         if(userInfo){
@@ -179,12 +183,13 @@ function Profile(props){
         </div>
         <div className="right-prof">
             {room?<div className="roomid">
-                RoomID : {room}
+                <div> <span className="roomidspan">RoomID</span>  : {room}</div>
+                <div className="copyIcon"><i class="far fa-copy" onClick={copytext}></i></div>
             </div>:<div></div>}
            
             <div className="host" id="host" onClick={createRoom}>
                 <h2>Host</h2>
-                {!room? <div className="host_cont">Host a video chat</div>:<div className="host_cont">Room ID:&nbsp;&nbsp;{room}</div>}
+                {!room? <div className="host_cont">Host a video chat</div>:<div className="host_cont">A chat room has been started</div>}
                
             </div>
             <div className="host" id="join" onClick={openmodal3}>
@@ -195,6 +200,12 @@ function Profile(props){
                 <h2>Password</h2>
                 <div className="host_cont">Change your password</div>
             </div>
+            <Link to="/addvideo">
+            <div className="host" id="retrive">
+                <h2>Retrive</h2>
+                <div className="host_cont">Retrive your saved videos</div>
+            </div></Link>
+          
         </div>
        
     </div>

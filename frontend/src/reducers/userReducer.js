@@ -39,11 +39,11 @@ function userUpdateReducer(state = {}, action) {
 function userRegisterReducer(state = {}, action) {
   switch (action.type) {
     case USER_REGISTER_REQUEST:
-      return { loading2: true };
+      return { loading: true };
     case USER_REGISTER_SUCCESS:
-      return { loading2: false, userInfo2: action.payload };
+      return { loading: false, userInfo: action.payload };
     case USER_REGISTER_FAIL:
-      return { loading2: false, error2: action.payload };
+      return { loading: false, error: action.payload };
     default:
       return state;
   }
