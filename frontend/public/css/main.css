@@ -11,6 +11,7 @@ html {
 }
 body {
   background-color: rgba(7, 6, 28, 1);
+ 
   font-family: Poppins;
   color: #fff;
   overflow-x: hidden;
@@ -535,4 +536,10 @@ header {
 .modal2-url{
   color: #3c3ce7;
   cursor: pointer;
+}
+
+/* Room */
+video{
+  width:10em;
+  height: 6em;
 }

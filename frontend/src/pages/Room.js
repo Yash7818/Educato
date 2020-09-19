@@ -4,22 +4,51 @@ import Peer from "simple-peer";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
+
+const VideoContainer = styled.div`
+padding:0;
+margin:0;
+box-sizing:border-box;
+display:flex;
+overflow-y:hidden;
+overflow-x:hidden;
+`;
+
 const Container = styled.div`
     padding:0;
+    margin:0;
     display: flex;
     height: 100vh;
-    width: 100%;
-    margin: auto;
+    width: 82%;
     flex-wrap: wrap;
     background-color: rgba(7, 6, 28, 1);
+    box-sizing:border-box;
+    overflow-y:hidden;
+    overflow-x:hidden;
     `;
+const UserContainer = styled.div`
+    padding:0;
+    margin0;
+    width:18%;
+    overflow-x:hidden;
+    background-color: rgba(1, 1, 1, 0.88);
+`;
+
+const Party = styled.div`
+padding-left:3.6em;
+text-transform:Capitalize;
+border:2px #000 soild;
+color:#fff;
+`;
 const VideoDiv = styled.div`
-height: 40%;
-width: 50%;
+height:33%;
+width: 33%;
+padding:0;
+margin:0;
 `;
 const StyledVideo = styled.video`
-height: 40%;
-width: 50%;
+height: 33%;
+width:33%;
 `;
 const StyledVideoduo = styled.video`
 height: 100%;
@@ -29,7 +58,7 @@ const Navof = styled.div`
     display:flex;
     position:absolute;
     letter-spacing:3em;
-    padding:0 18.5em;
+    padding:0 15em;
     bottom:1em;
     color:#fff;
     font-size:2em;
@@ -51,10 +80,7 @@ const Video = (props) => {
     }, []);
 
     return (
-        <VideoDiv>
-             <StyledVideoduo playsInline autoPlay ref={ref} ></StyledVideoduo>
-        </VideoDiv>
-       
+             <StyledVideo playsInline autoPlay ref={ref} ></StyledVideo>   
     );
 }
 
@@ -158,7 +184,8 @@ const Room = (props) => {
     }
 
     return (
-        <Container>
+        <VideoContainer>
+             <Container>
             <StyledVideo muted ref={userVideo} autoPlay playsInline />
             {peers.map((peer, index) => {
                 return (
@@ -171,6 +198,14 @@ const Room = (props) => {
             <i class="far fa-comments" onClick={MessageChat}></i>
             </Navof>
         </Container>
+        <UserContainer>
+                <Party>
+                    <h2>Participants</h2>
+                </Party>
+
+        </UserContainer>
+        </VideoContainer>
+       
     );
 };
 
