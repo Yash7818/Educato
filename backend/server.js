@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import userRoute from './routes/userRoute'
 import videoRoute from './routes/videoRoute'
+import examRoute from './routes/examRoute'
 import Cors from 'cors'
 import socket from 'socket.io'
 import http from 'http'
@@ -23,6 +24,7 @@ app.use(bodyParser.json())
 app.use(Cors())
 app.use("/api/users", userRoute)
 app.use("/api/video", videoRoute)
+app.use("/api/exam", examRoute)
 const server = http.createServer(app)
 const io = socket(server);
 
