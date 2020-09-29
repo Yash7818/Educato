@@ -8,6 +8,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  overflow-y:overlay;
 }
 body {
   background-color: rgba(7, 6, 28, 1);
@@ -15,6 +16,24 @@ body {
   font-family: Poppins;
   color: #fff;
   overflow-x: hidden;
+  overflow-y:overlay;
+}
+::-webkit-scrollbar {
+  width: 1em;
+  position: absolute;
+}
+::-webkit-scrollbar-track {
+ 
+  background:transparent;
+  display: none; 
+}
+
+::-webkit-scrollbar-thumb{
+  background: #fff ;
+  border-radius:10px ;
+}
+::-webkit-scrollbar-thumb:hover{
+  background: rgb(240, 234, 234);
 }
 /* .main{
   background-color: rgba(7, 6, 28, 1);
