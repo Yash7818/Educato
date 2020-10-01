@@ -180,6 +180,9 @@ header {
 .contact-links {
   margin: 2em 2em;
 }
+.contact-links h2{
+  cursor: pointer;
+}
 .contact-links ul {
   /* display: flex; */
   margin: 1em 0;
@@ -578,4 +581,26 @@ header {
 video{
   width:10em;
   height: 6em;
+}
+.name-modal{
+  position: absolute;
+  /* border: 2px #fff solid; */
+  border-radius: 1em;
+  left: 30em;
+  top:130em;
+  display: flex;
+  padding: 2em;
+  background: #ffffff9a;
+  box-shadow:5px 10px 8px #000;
+}
+.role{
+  margin: 1em 0;
+}
+.name-modal .info{
+  margin: 0 2em;
+}
+.img-head img{
+  max-width: 10em;
+  max-height: 10em;
+  border-radius: 50%;
 }

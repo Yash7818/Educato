@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signin, register } from '../actions/userActions'
 import { Link, Redirect } from 'react-router-dom';
+import profile from '../image/profile.jpg'
+
 
 function Home(props) {
     // window.location.reload();
+    const [isLoading,setisLoading] = useState(true);
     const [modal, setModal] = useState(false);
     const [modal1, setModal1] = useState(false);
     const [modal2, setModal2] = useState(false);
+    const [modal3,setModal3] = useState(false);
+    const [modal4,setModal4] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +22,11 @@ function Home(props) {
     const userRegister = useSelector(state => state.userRegister);
     const { loading2, userInfo2, error2 } = userRegister;
     const dispatch = useDispatch();
+
+
+    // componentDidMount=()=>{
+    //     setisLoading(false);
+    // }
 
     useEffect(() => {
         if (userInfo) {
@@ -46,6 +56,15 @@ function Home(props) {
         // if(error2){
         //     setModal1(true)
         // }
+    }
+    const openmodal3 = () =>{
+        setModal3(true);
+        setModal4(false);
+    }
+
+    const openmodal4 = () =>{
+        setModal4(true);
+        setModal3(false);
     }
 
     return (<div className="main">
@@ -641,8 +660,44 @@ function Home(props) {
                     </svg>
                 </div>
 
+                {
+                    modal3 && <div className="name-modal">
+                        <div className="img-head">
+                            <img src={profile}></img>
+                        </div>
+                            <div className="info">
+                                <div className="head">
+                                    <h1>Yash Wandhare</h1>
+                                </div>
+                                <div className="role">
+                                    <h2> Frontend Developer</h2>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                }
+                {
+                    modal4 && <div className="name-modal">
+                        <div className="img-head">
+                            <img src=""></img>
+                        </div>
+                            <div className="info">
+                                <div className="head">
+                                    <h1>Ashutosh Thakur</h1>
+                                </div>
+                                <div className="role">
+                                    <h2> Backend developer</h2>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                }
+
+                
+                    
+              
                 <div className="contact-links">
-                    <h2>Frontend Developer</h2>
+                    <h2 onClick={()=>{modal3?setModal3(false):openmodal3()}}>Frontend Developer</h2>
                     <ul>
                         <li> <a href="https://www.instagram.com/yashanandwandhare/"><i className="fab fa-instagram"></i><span>Instagram</span></a></li>
                         <li> <a href="https://github.com/Yash7818"><i className="fab fa-github"></i>  <span>GitHub</span> </a></li>
@@ -651,7 +706,7 @@ function Home(props) {
                     </ul>
                 </div>
                 <div className="contact-links">
-                    <h2>Backend Developer</h2>
+                    <h2 onClick={()=>{modal4?setModal4(false):openmodal4()}}>Backend Developer</h2>
                     <ul>
                         <li> <a href="https://www.instagram.com/as.hutosh5613/"><i className="fab fa-instagram"></i>   <span>Instagram</span></a></li>
                         <li> <a href="https://github.com/ashutosh1401"><i className="fab fa-github"></i>   <span>GitHub</span> </a></li>
