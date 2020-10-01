@@ -24,6 +24,9 @@
   - **MONGODB** IS USED AS THE DATABASE FOR THIS PROJECT TO STORE USERS DETAILS AND IS USED FOR OTHER STORAGE PURPOSES ALSO.
   
   VIDEO DEMO ![LINK](https://www.youtube.com/watch?v=BiM0F43FGLk)
+
+  ![pic1](home.png)  ![pic2](profile.png)
+  ![pic3](feature.png) ![pic4](chat.png)
   
   **Frontend and UI - Yash Wandhare**<br>
   **Backend - Ashutosh Thakur**
