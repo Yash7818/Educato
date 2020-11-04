@@ -5,17 +5,22 @@ import Exam from "../models/exammodel"
 import { isAuth } from "../utils"
 
 router.post('/examques', isAuth, (req, res) => {
-    const { question, option1, option2, option3, option4, correct } = req.body;
+    const { question, questionPic, option1, option1Pic, option2, option2Pic, option3, option3Pic, option4, option4Pic, correct } = req.body;
     if (!question || !option1 || !option2 || !option3 || !option4 || !correct) {
         return res.status(422).json({ error: "Please enter all details" });
     }
     console.log(req.user);
     const exam = new Exam({
         question,
+        questionPic,
         option1,
+        option1Pic,
         option2,
+        option2Pic,
         option3,
+        option3Pic,
         option4,
+        option4Pic,
         correct,
         postedBy: req.user
     })
@@ -33,10 +38,15 @@ router.patch("/examques/:id", isAuth, (req, res) => {
         .then(result => {
             console.log(result);
             result.question = req.body.question
+            result.questionPic = req.body.questionPic
             result.option1 = req.body.option1
+            result.option1Pic = req.body.option1Pic
             result.option2 = req.body.option2
+            result.option2Pic = req.body.option2Pic
             result.option3 = req.body.option3
+            result.option3Pic = req.body.option3Pic
             result.option4 = req.body.option4
+            result.option4Pic = req.body.option4Pic
             result.correct = req.body.correct
             result.save().then(ans => {
                 res.send({ ans })

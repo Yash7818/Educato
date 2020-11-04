@@ -6,21 +6,32 @@ const examSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    questionPic: {
+        type: String
+    },
     option1: {
         type: String,
-        required: true,
+    },
+    option1Pic: {
+        type: String
     },
     option2: {
         type: String,
-        required: true,
+    },
+    option2Pic: {
+        type: String
     },
     option3: {
         type: String,
-        required: true,
+    },
+    option3Pic: {
+        type: String
     },
     option4: {
         type: String,
-        required: true,
+    },
+    option4Pic: {
+        type: String
     },
     correct: {
         type: String,
